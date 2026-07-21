@@ -143,7 +143,7 @@ export default function Home() {
       <section className="about section shell">
         <div className="about-card">
           <div className="about-profile"><div className="profile-symbol">SC</div><div><p className="eyebrow"><span />Perfil</p><h2>De Bragado para productos con alcance real.</h2></div></div>
-          <p>Trabajo en remoto desde Palermo, CABA y también puedo sumarme a equipos híbridos o presenciales en CABA. Me siento especialmente cómodo en productos con integraciones, automatización y desafíos de operación.</p>
+          <p>Trabajo en remoto desde Buenos Aires y también puedo sumarme a equipos híbridos o presenciales en CABA. Me siento especialmente cómodo en productos con integraciones, automatización y desafíos de operación.</p>
           <div className="about-tags"><span>React / Vite</span><span>Node.js / Express</span><span>Prisma / PostgreSQL</span><span>Docker / Nginx</span><span>Mercado Libre OAuth</span><span>OpenAI API</span></div>
         </div>
       </section>
@@ -158,10 +158,10 @@ export default function Home() {
           </div>
           <div className="resume-actions" aria-label="Descargar currículum">
             <a className="resume-download" href="/cv/Santiago_Canu_CV_Full_Stack_ES.pdf" download>
-              <span><small>PDF</small><strong>CV en español</strong></span><b aria-hidden="true">↓</b>
+              <span><small>PDF · ATS</small><strong>CV en español</strong></span><b aria-hidden="true">↓</b>
             </a>
             <a className="resume-download" href="/cv/Santiago_Canu_CV_Full_Stack_EN.pdf" download>
-              <span><small>PDF</small><strong>CV in English</strong></span><b aria-hidden="true">↓</b>
+              <span><small>PDF · ATS</small><strong>CV in English</strong></span><b aria-hidden="true">↓</b>
             </a>
           </div>
         </div>
