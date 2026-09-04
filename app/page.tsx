@@ -1,4 +1,19 @@
-const projects = [
+import ProjectGallery, { type ProjectImage } from "./ProjectGallery";
+
+type Project = {
+  number: string;
+  title: string;
+  type: string;
+  description: string;
+  technologies: string[];
+  result: string;
+  accent: string;
+  images?: ProjectImage[];
+};
+
+// Para ocultar la galería de un proyecto, dejá `images: []` o eliminá la propiedad.
+// Para usar capturas reales, reemplazá las rutas y cambiá `placeholder` a false.
+const projects: Project[] = [
   {
     number: "01",
     title: "E-Beneficios",
@@ -8,6 +23,20 @@ const projects = [
     technologies: ["React + Vite", "Node + Express", "Prisma / PostgreSQL", "Redis + BullMQ"],
     result: "Operación centralizada",
     accent: "blue",
+    images: [
+      {
+        src: "/images/projects/e-beneficios-panel.webp",
+        alt: "Vista demostrativa de un panel de beneficios corporativos",
+        caption: "Panel general · imagen demostrativa para reemplazar por una captura real",
+        placeholder: true,
+      },
+      {
+        src: "/images/projects/e-beneficios-metricas.webp",
+        alt: "Vista demostrativa de métricas de una plataforma de beneficios",
+        caption: "Métricas y participación · imagen demostrativa",
+        placeholder: true,
+      },
+    ],
   },
   {
     number: "02",
@@ -18,6 +47,20 @@ const projects = [
     technologies: ["Mercado Libre OAuth", "Redis + Bull", "Workers", "Mensajería programada"],
     result: "+4.000 operaciones",
     accent: "lime",
+    images: [
+      {
+        src: "/images/projects/flow-sell-operacion.webp",
+        alt: "Vista demostrativa del panel de automatizaciones de Flow Sell",
+        caption: "Seguimiento operativo · imagen demostrativa",
+        placeholder: true,
+      },
+      {
+        src: "/images/projects/flow-sell-flujos.webp",
+        alt: "Vista demostrativa de un constructor de flujos automatizados",
+        caption: "Configuración de flujos · imagen demostrativa",
+        placeholder: true,
+      },
+    ],
   },
   {
     number: "03",
@@ -28,6 +71,20 @@ const projects = [
     technologies: ["React", "Node.js", "Mercado Pago", "PayPal + Webhooks"],
     result: "+1.000 ventas",
     accent: "orange",
+    images: [
+      {
+        src: "/images/projects/alfil-catalogo.webp",
+        alt: "Vista demostrativa del catálogo de productos digitales de Alfil Digital",
+        caption: "Catálogo digital · imagen demostrativa",
+        placeholder: true,
+      },
+      {
+        src: "/images/projects/alfil-checkout.webp",
+        alt: "Vista demostrativa del checkout de Alfil Digital",
+        caption: "Checkout y entrega · imagen demostrativa",
+        placeholder: true,
+      },
+    ],
   },
   {
     number: "04",
@@ -38,6 +95,65 @@ const projects = [
     technologies: ["React", "Node.js", "Procesamiento de datos", "OpenAI API"],
     result: "+100 archivos/día",
     accent: "purple",
+    images: [
+      {
+        src: "/images/projects/zetadata-analitica.webp",
+        alt: "Vista demostrativa de analítica operativa en ZetaData",
+        caption: "Analítica operativa · imagen demostrativa",
+        placeholder: true,
+      },
+      {
+        src: "/images/projects/zetadata-kpis.webp",
+        alt: "Vista demostrativa del tablero de indicadores de ZetaData",
+        caption: "Indicadores clave · imagen demostrativa",
+        placeholder: true,
+      },
+    ],
+  },
+];
+
+const certifications = [
+  {
+    category: "Carrera",
+    title: "Desarrollo Full Stack",
+    date: "30 abr. 2024",
+    detail: "194 horas · 51 semanas",
+    href: "/certificados/carrera-full-stack-santiago-canu.pdf",
+  },
+  {
+    category: "Curso",
+    title: "Programación Backend",
+    date: "30 abr. 2024",
+    detail: "96 horas · 24 semanas",
+    href: "/certificados/programacion-backend-santiago-canu.pdf",
+  },
+  {
+    category: "Carrera",
+    title: "Desarrollo Frontend React",
+    date: "5 sep. 2023",
+    detail: "98 horas · 27 semanas",
+    href: "/certificados/carrera-frontend-react-santiago-canu.pdf",
+  },
+  {
+    category: "Curso",
+    title: "React JS",
+    date: "5 sep. 2023",
+    detail: "30 horas · 8 semanas",
+    href: "/certificados/react-js-santiago-canu.pdf",
+  },
+  {
+    category: "Curso",
+    title: "JavaScript",
+    date: "8 jul. 2023",
+    detail: "32 horas · 9 semanas",
+    href: "/certificados/javascript-santiago-canu.pdf",
+  },
+  {
+    category: "Curso",
+    title: "Desarrollo Web",
+    date: "22 jun. 2023",
+    detail: "36 horas · 10 semanas",
+    href: "/certificados/desarrollo-web-santiago-canu.pdf",
   },
 ];
 
@@ -53,6 +169,7 @@ export default function Home() {
           <div className="nav-links">
             <a href="#proyectos">Proyectos</a>
             <a href="#proceso">Enfoque</a>
+            <a href="#certificaciones">Formación</a>
             <a href="#cv">CV</a>
             <a href="#contacto">Contacto</a>
           </div>
@@ -114,7 +231,11 @@ export default function Home() {
           {projects.map((project) => (
             <article className={`project-card ${project.accent}`} key={project.title}>
               <div className="project-top"><span>/{project.number}</span><span className="project-arrow" aria-hidden="true">↗</span></div>
-              <div className="project-shape" aria-hidden="true"><i /><i /><i /></div>
+              {project.images?.length ? (
+                <ProjectGallery images={project.images} projectTitle={project.title} />
+              ) : (
+                <div className="project-shape" aria-hidden="true"><i /><i /><i /></div>
+              )}
               <p className="project-type">{project.type}</p>
               <h3>{project.title}</h3>
               <p className="project-description">{project.description}</p>
@@ -135,16 +256,42 @@ export default function Home() {
           <ol className="process-list">
             <li><span>01</span><div><h3>Entender la operación</h3><p>Identifico el cuello de botella, los datos importantes y qué resultado vale la pena medir.</p></div></li>
             <li><span>02</span><div><h3>Diseñar un sistema claro</h3><p>Defino una solución mantenible: interfaz, API, datos, integraciones y tareas en segundo plano.</p></div></li>
-            <li><span>03</span><div><h3>Ponerlo en marcha</h3><p>Despliego, observo y mejoro. El objetivo no es “entregar código”; es que el producto funcione de verdad.</p></div></li>
+            <li><span>03</span><div><h3>Ponerlo en marcha e iterar</h3><p>Despliego, observo y priorizo mejoras en ciclos breves, organizando el avance con prácticas de Scrum y Kanban.</p></div></li>
           </ol>
+        </div>
+      </section>
+
+      <section className="certifications section shell" id="certificaciones">
+        <div className="section-heading certifications-heading">
+          <div><p className="eyebrow"><span />Formación verificable</p><h2>Conocimientos respaldados por seis credenciales.</h2></div>
+          <p>Formación completada en Coderhouse. Cada tarjeta abre el certificado original en PDF con la carga horaria y la fecha de emisión.</p>
+        </div>
+        <div className="certifications-grid">
+          {certifications.map((certification, index) => (
+            <a
+              className="certification-card"
+              href={certification.href}
+              target="_blank"
+              rel="noreferrer"
+              key={certification.title}
+            >
+              <div className="certification-top">
+                <span>{certification.category}</span>
+                <b>{String(index + 1).padStart(2, "0")}</b>
+              </div>
+              <h3>{certification.title}</h3>
+              <p>{certification.detail}</p>
+              <div className="certification-link"><span>{certification.date}</span><strong>Ver PDF ↗</strong></div>
+            </a>
+          ))}
         </div>
       </section>
 
       <section className="about section shell">
         <div className="about-card">
           <div className="about-profile"><div className="profile-symbol">SC</div><div><p className="eyebrow"><span />Perfil</p><h2>De Bragado para productos con alcance real.</h2></div></div>
-          <p>Trabajo en remoto desde Palermo, CABA y también puedo sumarme a equipos híbridos o presenciales en CABA. Me siento especialmente cómodo en productos con integraciones, automatización y desafíos de operación.</p>
-          <div className="about-tags"><span>React / Vite</span><span>Node.js / Express</span><span>Prisma / PostgreSQL</span><span>Docker / Nginx</span><span>Mercado Libre OAuth</span><span>OpenAI API</span></div>
+          <p>Trabajo en remoto desde Bragado, Buenos Aires, y también puedo sumarme a equipos híbridos o presenciales en CABA. Me siento especialmente cómodo en productos con integraciones, automatización y desafíos de operación.</p>
+          <div className="about-tags"><span>React / Vite</span><span>Node.js / Express</span><span>Prisma / PostgreSQL</span><span>Docker / Nginx</span><span>Mercado Libre OAuth</span><span>OpenAI API</span><span>Scrum / Kanban</span></div>
         </div>
       </section>
 
