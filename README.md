@@ -1,6 +1,6 @@
 # Portfolio de Santiago Cañu
 
-Portfolio responsive construido con Next.js, React, TypeScript y CSS propio. Incluye proyectos con galería opcional, certificaciones verificables y descargas de CV. No requiere base de datos, variables de entorno ni Tailwind CSS.
+Portfolio responsive construido con Next.js, React, TypeScript y CSS propio. Incluye proyectos con casos visuales opcionales en PDF, certificaciones verificables y descargas de CV. No requiere base de datos, variables de entorno ni Tailwind CSS.
 
 ## Requisitos
 
@@ -38,38 +38,29 @@ Después configurá tu dominio desde el panel de la plataforma elegida. No hay s
 ## Dónde editar
 
 - `app/page.tsx`: contenido, proyectos, certificaciones, textos y enlaces.
-- `app/ProjectGallery.tsx`: comportamiento de la galería (0, 1 o varias imágenes).
 - `app/globals.css`: estilos y comportamiento responsive.
 - `app/layout.tsx`: SEO básico, título y descripción.
 
-## Reemplazar las imágenes de demostración
+## Agregar un caso visual a un proyecto
 
-Las imágenes actuales están en `public/images/projects/` y aparecen identificadas como “Vista demo”. Para reemplazarlas:
+Los casos visuales se guardan como PDF dentro de `public/proyectos/`. Para agregar uno:
 
-1. Copiá las capturas reales dentro de `public/images/projects/`.
-2. En `app/page.tsx`, buscá el proyecto y cambiá `src`, `alt` y `caption` dentro de `images`.
-3. Cambiá `placeholder: true` por `placeholder: false` para ocultar la etiqueta “Vista demo”.
+1. Copiá el PDF dentro de `public/proyectos/` con un nombre corto y sin espacios.
+2. En `app/page.tsx`, buscá el proyecto y agregá la propiedad `caseStudyPdf` con su ruta pública.
 
 Ejemplo:
 
 ```tsx
-images: [
-  {
-    src: "/images/projects/mi-proyecto-dashboard.webp",
-    alt: "Dashboard principal de Mi Proyecto",
-    caption: "Vista general del panel",
-    placeholder: false,
-  },
-]
+caseStudyPdf: "/proyectos/mi-proyecto-portfolio.pdf",
 ```
 
-- Con varias imágenes se muestran navegación, contador y miniaturas.
-- Con una sola imagen no aparecen controles innecesarios.
-- Con `images: []` —o eliminando la propiedad— la tarjeta conserva su composición y no muestra enlaces ni imágenes rotas.
-- Si una ruta falla, la galería descarta esa imagen y mantiene visibles las restantes.
+- E-Beneficios ya tiene asociado su caso visual en PDF.
+- Si `caseStudyPdf` no existe, la tarjeta no muestra ningún botón, enlace ni espacio reservado.
+- El enlace abre el PDF en una pestaña nueva para que el visitante pueda recorrer las pantallas con comodidad.
 
 ## Certificados y CV
 
 - Los seis PDFs originales están en `public/certificados/` y sus datos se administran en el arreglo `certifications` de `app/page.tsx`.
 - El CV actualizado en español está en `public/cv/Santiago_Canu_CV_Full_Stack_ES.pdf`.
 - También se incluye su versión editable en `public/cv/Santiago_Canu_CV_Full_Stack_ES.docx`.
+- El CV en inglés está en `public/cv/Santiago_Canu_CV_Full_Stack_EN.pdf` y su versión editable en `.docx`.

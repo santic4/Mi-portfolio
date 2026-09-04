@@ -1,5 +1,3 @@
-import ProjectGallery, { type ProjectImage } from "./ProjectGallery";
-
 type Project = {
   number: string;
   title: string;
@@ -8,11 +6,11 @@ type Project = {
   technologies: string[];
   result: string;
   accent: string;
-  images?: ProjectImage[];
+  caseStudyPdf?: string;
 };
 
-// Para ocultar la galería de un proyecto, dejá `images: []` o eliminá la propiedad.
-// Para usar capturas reales, reemplazá las rutas y cambiá `placeholder` a false.
+// Si un proyecto tiene un caso visual en PDF, agregá `caseStudyPdf`.
+// Si se omite la propiedad, la tarjeta mantiene su composición sin mostrar un enlace vacío.
 const projects: Project[] = [
   {
     number: "01",
@@ -23,20 +21,7 @@ const projects: Project[] = [
     technologies: ["React + Vite", "Node + Express", "Prisma / PostgreSQL", "Redis + BullMQ"],
     result: "Operación centralizada",
     accent: "blue",
-    images: [
-      {
-        src: "/images/projects/e-beneficios-panel.webp",
-        alt: "Vista demostrativa de un panel de beneficios corporativos",
-        caption: "Panel general · imagen demostrativa para reemplazar por una captura real",
-        placeholder: true,
-      },
-      {
-        src: "/images/projects/e-beneficios-metricas.webp",
-        alt: "Vista demostrativa de métricas de una plataforma de beneficios",
-        caption: "Métricas y participación · imagen demostrativa",
-        placeholder: true,
-      },
-    ],
+    caseStudyPdf: "/proyectos/ebeneficios-portfolio.pdf",
   },
   {
     number: "02",
@@ -47,20 +32,6 @@ const projects: Project[] = [
     technologies: ["Mercado Libre OAuth", "Redis + Bull", "Workers", "Mensajería programada"],
     result: "+4.000 operaciones",
     accent: "lime",
-    images: [
-      {
-        src: "/images/projects/flow-sell-operacion.webp",
-        alt: "Vista demostrativa del panel de automatizaciones de Flow Sell",
-        caption: "Seguimiento operativo · imagen demostrativa",
-        placeholder: true,
-      },
-      {
-        src: "/images/projects/flow-sell-flujos.webp",
-        alt: "Vista demostrativa de un constructor de flujos automatizados",
-        caption: "Configuración de flujos · imagen demostrativa",
-        placeholder: true,
-      },
-    ],
   },
   {
     number: "03",
@@ -71,20 +42,6 @@ const projects: Project[] = [
     technologies: ["React", "Node.js", "Mercado Pago", "PayPal + Webhooks"],
     result: "+1.000 ventas",
     accent: "orange",
-    images: [
-      {
-        src: "/images/projects/alfil-catalogo.webp",
-        alt: "Vista demostrativa del catálogo de productos digitales de Alfil Digital",
-        caption: "Catálogo digital · imagen demostrativa",
-        placeholder: true,
-      },
-      {
-        src: "/images/projects/alfil-checkout.webp",
-        alt: "Vista demostrativa del checkout de Alfil Digital",
-        caption: "Checkout y entrega · imagen demostrativa",
-        placeholder: true,
-      },
-    ],
   },
   {
     number: "04",
@@ -95,20 +52,6 @@ const projects: Project[] = [
     technologies: ["React", "Node.js", "Procesamiento de datos", "OpenAI API"],
     result: "+100 archivos/día",
     accent: "purple",
-    images: [
-      {
-        src: "/images/projects/zetadata-analitica.webp",
-        alt: "Vista demostrativa de analítica operativa en ZetaData",
-        caption: "Analítica operativa · imagen demostrativa",
-        placeholder: true,
-      },
-      {
-        src: "/images/projects/zetadata-kpis.webp",
-        alt: "Vista demostrativa del tablero de indicadores de ZetaData",
-        caption: "Indicadores clave · imagen demostrativa",
-        placeholder: true,
-      },
-    ],
   },
 ];
 
@@ -231,15 +174,23 @@ export default function Home() {
           {projects.map((project) => (
             <article className={`project-card ${project.accent}`} key={project.title}>
               <div className="project-top"><span>/{project.number}</span><span className="project-arrow" aria-hidden="true">↗</span></div>
-              {project.images?.length ? (
-                <ProjectGallery images={project.images} projectTitle={project.title} />
-              ) : (
-                <div className="project-shape" aria-hidden="true"><i /><i /><i /></div>
-              )}
+              <div className="project-shape" aria-hidden="true"><i /><i /><i /></div>
               <p className="project-type">{project.type}</p>
               <h3>{project.title}</h3>
               <p className="project-description">{project.description}</p>
               <ul className="project-tech">{project.technologies.map((tech) => <li key={tech}>{tech}</li>)}</ul>
+              {project.caseStudyPdf && (
+                <a
+                  className="project-case-link"
+                  href={project.caseStudyPdf}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Abrir caso visual de ${project.title} en PDF`}
+                >
+                  <span><small>Caso visual</small><strong>Ver imágenes del proyecto</strong></span>
+                  <b>PDF ↗</b>
+                </a>
+              )}
               <div className="project-result"><span>Resultado</span><strong>{project.result}</strong></div>
             </article>
           ))}
