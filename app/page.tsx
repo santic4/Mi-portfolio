@@ -32,6 +32,7 @@ const projects: Project[] = [
     technologies: ["Mercado Libre OAuth", "Redis + Bull", "Workers", "Mensajería programada"],
     result: "+4.000 operaciones",
     accent: "lime",
+    caseStudyPdf: "/proyectos/flow-sell-portfolio.pdf",
   },
   {
     number: "03",
