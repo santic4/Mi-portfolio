@@ -43,6 +43,7 @@ const projects: Project[] = [
     technologies: ["React", "Node.js", "Mercado Pago", "PayPal + Webhooks"],
     result: "+1.000 ventas",
     accent: "orange",
+    caseStudyPdf: "/proyectos/Alfil_Digital_Portfolio.pdf",
   },
   {
     number: "04",
