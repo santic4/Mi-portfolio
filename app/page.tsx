@@ -7,30 +7,72 @@ type Project = {
   result: string;
   accent: string;
   caseStudyPdf?: string;
+  status?: string;
+  statusTone?: "active" | "historic" | "neutral";
+  highlights?: string[];
 };
 
-// Si un proyecto tiene un caso visual en PDF, agregá `caseStudyPdf`.
-// Si se omite la propiedad, la tarjeta mantiene su composición sin mostrar un enlace vacío.
+// Las tarjetas muestran el resumen de cada producto y permiten desplegar el alcance técnico
+// sin convertir la grilla principal en bloques de texto demasiado largos.
 const projects: Project[] = [
   {
     number: "01",
     title: "E-Beneficios",
-    type: "Plataforma B2B de beneficios",
+    type: "Plataforma B2B2C de beneficios y promociones",
     description:
-      "Una operación compleja llevada a una sola plataforma: sitio público, paneles por rol, procesos internos y una infraestructura lista para crecer.",
-    technologies: ["React + Vite", "Node + Express", "Prisma / PostgreSQL", "Redis + BullMQ"],
-    result: "Operación centralizada",
+      "Plataforma multirol que conecta usuarios, empresas y administradores en un mismo ecosistema: catálogo público, gestión comercial, analítica, comunicaciones, automatizaciones e infraestructura productiva.",
+    technologies: [
+      "React + Vite",
+      "Node + Express",
+      "Prisma / PostgreSQL",
+      "Redis + BullMQ",
+      "Docker + Nginx",
+      "Google OAuth",
+    ],
+    highlights: [
+      "Sitio público con búsqueda, categorías, marcas, Flash, destacados, rankings Top y páginas de detalle.",
+      "Paneles independientes para Admin, Empresa y Usuario, con autenticación local/Google, roles y permisos.",
+      "Gestión de beneficios, empresas, planes, facturación, contenido editorial, estados y publicación.",
+      "Tracking y analítica de impresiones, vistas, clicks, guardados y estadísticas agregadas por día.",
+      "Emails transaccionales y comunicaciones/newsletters para verificación, onboarding y avisos del sistema.",
+      "Workers con Redis + BullMQ para estadísticas, importaciones CSV, newsletters y tareas asíncronas.",
+      "SEO técnico con metadata, canonicals, sitemap, robots, estructura de URLs y Google Search Console.",
+      "Deploy con Docker Compose + Nginx en dos VPS: aplicación principal y servidor dedicado a workers.",
+    ],
+    result: "Plataforma activa en producción",
+    status: "Activo · Producción",
+    statusTone: "active",
     accent: "blue",
     caseStudyPdf: "/proyectos/ebeneficios-portfolio.pdf",
   },
   {
     number: "02",
     title: "Flow Sell",
-    type: "Automatización de postventa",
+    type: "SaaS de automatización posventa para Mercado Libre",
     description:
-      "Un sistema de workers para que vender productos digitales por Mercado Libre no dependa de una persona respondiendo mensajes todo el día.",
-    technologies: ["Mercado Libre OAuth", "Redis + Bull", "Workers", "Mensajería programada"],
-    result: "+4.000 operaciones",
+      "SaaS que centraliza publicaciones, ventas, estadísticas y mensajería posventa de Mercado Libre mediante flujos automáticos, plantillas, campañas y procesamiento asíncrono.",
+    technologies: [
+      "React",
+      "Node + Express",
+      "MongoDB",
+      "Mercado Libre API + OAuth",
+      "Redis + BullMQ",
+      "Cloudinary",
+      "Render",
+    ],
+    highlights: [
+      "OAuth con Mercado Libre y sincronización de publicaciones, ventas y actividad por cuenta.",
+      "Dashboard con facturación, órdenes, unidades, ticket promedio, compradores y rendimiento por producto.",
+      "Flujos posventa con mensajes inmediatos y seguimientos diferidos configurables por publicación.",
+      "Plantillas reutilizables con imágenes y campañas para audiencias y períodos seleccionados.",
+      "Colas Redis + BullMQ para webhooks, mensajes programados, tracking, reintentos y trabajos en background.",
+      "Webhooks endurecidos con validación, idempotencia y controles para evitar procesamiento duplicado.",
+      "Seguridad de sesiones y tokens: cifrado, cookies protegidas, CSRF, Helmet y rate limiting.",
+      "Migración de archivos de Firebase a Cloudinary y despliegue productivo con servicios administrados.",
+    ],
+    result: "+4.000 operaciones automatizadas",
+    status: "Activo · Producción",
+    statusTone: "active",
     accent: "lime",
     caseStudyPdf: "/proyectos/flow-sell-portfolio.pdf",
   },
@@ -39,9 +81,28 @@ const projects: Project[] = [
     title: "Alfil Digital",
     type: "E-commerce de productos digitales",
     description:
-      "Checkout, pagos, webhooks y entrega automática: un circuito completo que convierte una compra en una entrega inmediata.",
-    technologies: ["React", "Node.js", "Mercado Pago", "PayPal + Webhooks"],
-    result: "+1.000 ventas",
+      "E-commerce full stack que integró descubrimiento, compra, pago y entrega de ebooks, imprimibles y otros productos digitales dentro de un flujo completamente online.",
+    technologies: [
+      "React",
+      "Node + Express",
+      "MongoDB",
+      "Mercado Pago",
+      "PayPal + Webhooks",
+      "Cloudinary",
+    ],
+    highlights: [
+      "Home, catálogo, buscador, filtros, categorías, páginas de producto y recomendaciones relacionadas.",
+      "Carrito y checkout con una experiencia responsive orientada a reducir fricción en la compra.",
+      "Integraciones con Mercado Pago y PayPal para cobros locales e internacionales.",
+      "Webhooks para validar pagos y continuar automáticamente el circuito posterior a la compra.",
+      "Entrega automática de productos digitales y comunicaciones asociadas a las operaciones.",
+      "Herramientas administrativas para productos, pedidos, usuarios y contenido del e-commerce.",
+      "Soporte y contacto por WhatsApp, además de preguntas frecuentes dentro de la experiencia pública.",
+      "Rediseño integral y migración de imágenes/archivos desde Firebase hacia Cloudinary.",
+    ],
+    result: "+1.000 ventas al cierre",
+    status: "Ciclo finalizado · métricas históricas",
+    statusTone: "historic",
     accent: "orange",
     caseStudyPdf: "/proyectos/Alfil_Digital_Portfolio.pdf",
   },
@@ -53,6 +114,8 @@ const projects: Project[] = [
       "KPIs para seguir una operación diaria y convertir información dispersa en señales útiles para decidir más rápido.",
     technologies: ["React", "Node.js", "Procesamiento de datos", "OpenAI API"],
     result: "+100 archivos/día",
+    status: "Caso de producto",
+    statusTone: "neutral",
     accent: "purple",
   },
 ];
@@ -175,12 +238,32 @@ export default function Home() {
         <div className="projects-grid">
           {projects.map((project) => (
             <article className={`project-card ${project.accent}`} key={project.title}>
-              <div className="project-top"><span>/{project.number}</span><span className="project-arrow" aria-hidden="true">↗</span></div>
+              <div className="project-top">
+                <span>/{project.number}</span>
+                {project.status && (
+                  <span className={`project-status ${project.statusTone ?? "neutral"}`}>
+                    <i aria-hidden="true" />{project.status}
+                  </span>
+                )}
+              </div>
               <div className="project-shape" aria-hidden="true"><i /><i /><i /></div>
               <p className="project-type">{project.type}</p>
               <h3>{project.title}</h3>
               <p className="project-description">{project.description}</p>
               <ul className="project-tech">{project.technologies.map((tech) => <li key={tech}>{tech}</li>)}</ul>
+
+              {project.highlights && project.highlights.length > 0 && (
+                <details className="project-details">
+                  <summary>
+                    <span><small>Alcance técnico</small><strong>Ver qué incluye el proyecto</strong></span>
+                    <b aria-hidden="true">+</b>
+                  </summary>
+                  <ul className="project-highlights">
+                    {project.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+                  </ul>
+                </details>
+              )}
+
               {project.caseStudyPdf && (
                 <a
                   className="project-case-link"
@@ -189,7 +272,7 @@ export default function Home() {
                   rel="noreferrer"
                   aria-label={`Abrir caso visual de ${project.title} en PDF`}
                 >
-                  <span><small>Caso visual</small><strong>Ver imágenes del proyecto</strong></span>
+                  <span><small>Recorrido visual</small><strong>Explorar pantallas y funcionalidades</strong></span>
                   <b>PDF ↗</b>
                 </a>
               )}
